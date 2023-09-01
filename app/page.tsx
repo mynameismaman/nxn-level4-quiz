@@ -37,17 +37,7 @@ export default function Home() {
                           active ? "bg-amber-500 font-bold" : "text-gray-900"
                         } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
                       >
-                        {active ? (
-                          <FolderIcon
-                            className="mr-2 h-5 w-5"
-                            aria-hidden="true"
-                          />
-                        ) : (
-                          <FolderIcon
-                            className="mr-2 h-5 w-5"
-                            aria-hidden="true"
-                          />
-                        )}
+                        {<FolderIcon />}
                         Form Submission
                       </button>
                     </Link>
@@ -66,17 +56,7 @@ export default function Home() {
                           active ? "bg-amber-500 font-bold" : "text-gray-900"
                         } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
                       >
-                        {active ? (
-                          <FolderIcon
-                            className="mr-2 h-5 w-5"
-                            aria-hidden="true"
-                          />
-                        ) : (
-                          <FolderIcon
-                            className="mr-2 h-5 w-5"
-                            aria-hidden="true"
-                          />
-                        )}
+                        {active ? <FolderIcon /> : <FolderIcon />}
                         Blog Website
                       </button>
                     </Link>
@@ -91,10 +71,11 @@ export default function Home() {
   );
 }
 
-function FolderIcon(props) {
+function FolderIcon() {
   return (
     <svg
-      {...props}
+      className="mr-2 h-5 w-5"
+      aria-hidden="true"
       xmlns="http://www.w3.org/2000/svg"
       fill="none"
       viewBox="0 0 24 24"
