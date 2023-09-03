@@ -3,16 +3,38 @@ import { useState } from "react";
 import { Tab } from "@headlessui/react";
 import { DM_Sans } from "next/font/google";
 import Image from "next/image";
+import { useForm, SubmitHandler } from "react-hook-form";
 
 const dm_sans = DM_Sans({
   subsets: ["latin"],
   variable: "--font-dm_sans",
 });
 
+type Inputs = {
+  name: string;
+  email: string;
+  phoneNumber: string;
+  company: string;
+  alamatCuy: string;
+};
+
 export default function Home() {
   const [selectedIndex, setSelectedIndex] = useState(0);
+  const {
+    register,
+    handleSubmit,
+    reset,
+    getValues,
+    formState: { errors, isValid },
+  } = useForm<Inputs>();
+
+  const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data);
 
   function handleNextButton() {
+    if (!isValid) return;
+
+    reset({ ...getValues }, { keepValues: true });
+
     if (selectedIndex < 3) {
       setSelectedIndex(selectedIndex + 1);
     }
@@ -37,79 +59,195 @@ export default function Home() {
           Please fill the form below to receive a quote for your project. Feel
           free to add as much detail as needed.
         </div>
-        <div
-          className={`flex flex-col justify-normal items-center w-custom h-[37.875rem] text-center pt-8 rounded-3xl border border-slate-200 shadow-lg`}
-        >
-          <Tab.Group selectedIndex={selectedIndex}>
-            <Tab.List className="flex space-x-4 px-2 py-2">
-              <Tab as="div">
-                <ProcessStep
-                  number={1}
-                  selectedNumber={selectedIndex}
-                  rightLine={true}
-                />
-              </Tab>
-              <Tab as="div">
-                <ProcessStep
-                  number={2}
-                  selectedNumber={selectedIndex}
-                  rightLine={true}
-                />
-              </Tab>
-              <Tab as="div">
-                <ProcessStep
-                  number={3}
-                  selectedNumber={selectedIndex}
-                  rightLine={true}
-                />
-              </Tab>
-              <Tab as="div">
-                <ProcessStep number={4} selectedNumber={selectedIndex} />
-              </Tab>
-            </Tab.List>
-            <div className="w-[37.25rem] h-px mt-8 mb-16 bg-custom_neutral_400"></div>
-            <div className="flex flex-col w-full h-full px-11">
-              <Tab.Panels>
-                <Tab.Panel>
-                  <ContactDetail />
-                </Tab.Panel>
-                <Tab.Panel>
-                  <OurService />
-                </Tab.Panel>
-                <Tab.Panel>
-                  <ProjectBudget />
-                </Tab.Panel>
-                <Tab.Panel>
-                  <Submit />
-                </Tab.Panel>
-              </Tab.Panels>
-            </div>
-          </Tab.Group>
-        </div>
-        <div className="flex flex-row-reverse w-full justify-between mt-8">
-          <button
-            onClick={handleNextButton}
-            className={`bg-custom_primary_color text-white px-10 py-5 rounded-[56px] text-custom700_18 drop-shadow-[0px_3px_12px_rgba(74,58,255,0.18)] ${
-              selectedIndex == 3 ? "invisible" : "visible"
-            }`}
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <div
+            className={`flex flex-col justify-normal items-center w-custom h-[37.875rem] text-center pt-8 rounded-3xl border border-slate-200 shadow-lg`}
           >
-            Next Step
-          </button>
-          <button
-            onClick={handlePreviousButton}
-            className={`border border-custom_primary_color text-custom_primary_color px-10 py-5 rounded-[66px] text-custom400_18 ${
-              selectedIndex == 0 ? "invisible" : "visible"
-            }`}
-          >
-            Previous Step
-          </button>
-        </div>
+            <Tab.Group selectedIndex={selectedIndex}>
+              <Tab.List className="flex space-x-4 px-2 py-2 justify-center">
+                <Tab as="div">
+                  <ProcessStep
+                    number={1}
+                    selectedNumber={selectedIndex}
+                    rightLine={true}
+                  />
+                </Tab>
+                <Tab as="div">
+                  <ProcessStep
+                    number={2}
+                    selectedNumber={selectedIndex}
+                    rightLine={true}
+                  />
+                </Tab>
+                <Tab as="div">
+                  <ProcessStep
+                    number={3}
+                    selectedNumber={selectedIndex}
+                    rightLine={true}
+                  />
+                </Tab>
+                <Tab as="div">
+                  <ProcessStep number={4} selectedNumber={selectedIndex} />
+                </Tab>
+              </Tab.List>
+              <div className="w-[37.25rem] h-px mt-8 mb-16 bg-custom_neutral_400"></div>
+              <div className="flex flex-col h-full px-5 w-[37.2rem]">
+                <Tab.Panels>
+                  <Tab.Panel>
+                    <ContactDetail />
+                    <div className="flex flex-wrap mb-6 mt-8 justify-between ">
+                      <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0 text-left">
+                        <label className="block tracking-wide text-custom_neutral_800 mb-4 text-custom500_18">
+                          Name
+                        </label>
+                        <label className="relative block">
+                          <Image
+                            src="/images/icon_name.png"
+                            width={20.29}
+                            height={25.826}
+                            alt="name"
+                            className="pointer-events-none absolute top-4 right-5"
+                          />
+                          <input
+                            className="appearance-none block w-full h-16  text-custom_neutral_600 border border-[#EFF0F6] shadow-[0px_5px_16px_0_rgba(8,15,52,0.06)] rounded-[46px] py-5 pl-6 pr-12 mb-4 leading-tight focus:outline-none focus:bg-white"
+                            id="grid-first-name"
+                            type="text"
+                            placeholder="Name"
+                            {...register("name", { required: true })}
+                          />
+                        </label>
+                        {errors.name && (
+                          <p className="text-red-500 text-xs italic text-right">
+                            is Required
+                          </p>
+                        )}
+                      </div>
+                      <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0 text-left">
+                        <label className="block tracking-wide text-custom_neutral_800 mb-4 text-custom500_18">
+                          Email
+                        </label>
+                        <label className="relative block">
+                          <Image
+                            src="/images/icon_message.png"
+                            width={23}
+                            height={16}
+                            alt="message"
+                            className="pointer-events-none absolute top-6 right-5"
+                          />
+                          <input
+                            className="appearance-none block w-full h-16  text-custom_neutral_600 border border-[#EFF0F6] shadow-[0px_5px_16px_0_rgba(8,15,52,0.06)] rounded-[46px] py-5 pl-6 pr-12 mb-4 leading-tight focus:outline-none focus:bg-white"
+                            id="grid-first-name"
+                            type="text"
+                            placeholder="Email"
+                            {...register("email", { required: true })}
+                          />
+                        </label>
+                        {errors.email && (
+                          <p className="text-red-500 text-xs italic text-right">
+                            is Required
+                          </p>
+                        )}
+                      </div>
+                      <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0 text-left">
+                        <label className="block tracking-wide text-custom_neutral_800 mb-4 text-custom500_18">
+                          Phone Number
+                        </label>
+                        <label className="relative block">
+                          <Image
+                            src="/images/icon_phone.png"
+                            width={14.696}
+                            height={26}
+                            alt="phone"
+                            className="pointer-events-none absolute top-5 right-5"
+                          />
+                          <input
+                            className="appearance-none block w-full h-16  text-custom_neutral_600 border border-[#EFF0F6] shadow-[0px_5px_16px_0_rgba(8,15,52,0.06)] rounded-[46px] py-5 pl-6 pr-12 mb-4 leading-tight focus:outline-none focus:bg-white"
+                            id="grid-first-name"
+                            type="text"
+                            placeholder="Phone Number"
+                            {...register("phoneNumber", { required: true })}
+                          />
+                        </label>
+                        {errors.phoneNumber && (
+                          <p className="text-red-500 text-xs italic text-right">
+                            is Required
+                          </p>
+                        )}
+                      </div>
+                      <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0 text-left">
+                        <label className="block tracking-wide text-custom_neutral_800 mb-4 text-custom500_18">
+                          Company
+                        </label>
+                        <label className="relative block">
+                          <Image
+                            src="/images/icon_company.png"
+                            width={14.481}
+                            height={28.875}
+                            alt="company"
+                            className="pointer-events-none absolute top-5 right-5"
+                          />
+                          <input
+                            className="appearance-none block w-full h-16  text-custom_neutral_600 border border-[#EFF0F6] shadow-[0px_5px_16px_0_rgba(8,15,52,0.06)] rounded-[46px] py-5 pl-6 pr-12 mb-4 leading-tight focus:outline-none focus:bg-white"
+                            id="grid-first-name"
+                            type="text"
+                            placeholder="Company"
+                            {...register("company", { required: true })}
+                          />
+                        </label>
+                        {errors.company && (
+                          <p className="text-red-500 text-xs italic text-right">
+                            is Required
+                          </p>
+                        )}
+                      </div>
+                    </div>
+                  </Tab.Panel>
+                  <Tab.Panel>
+                    <OurService />
+                  </Tab.Panel>
+                  <Tab.Panel>
+                    <ProjectBudget />
+                  </Tab.Panel>
+                  <Tab.Panel>
+                    <Submit />
+                  </Tab.Panel>
+                </Tab.Panels>
+              </div>
+            </Tab.Group>
+          </div>
+          <div className="flex flex-row-reverse w-full justify-between mt-8">
+            <button
+              onClick={handleSubmit(handleNextButton)}
+              className={`bg-custom_primary_color text-white px-10 py-5 rounded-[56px] text-custom700_18 drop-shadow-[0px_3px_12px_rgba(74,58,255,0.18)] ${
+                selectedIndex == 3 ? "invisible" : "visible"
+              }`}
+            >
+              Next Step
+            </button>
+            <button
+              onClick={handlePreviousButton}
+              className={`border border-custom_primary_color text-custom_primary_color px-10 py-5 rounded-[66px] text-custom400_18 ${
+                selectedIndex == 0 ? "invisible" : "visible"
+              }`}
+            >
+              Previous Step
+            </button>
+          </div>
+        </form>
       </div>
     </div>
   );
 }
 
-function ProcessStep({ number, selectedNumber, rightLine = false }) {
+function ProcessStep({
+  number,
+  selectedNumber,
+  rightLine = false,
+}: {
+  number: number;
+  selectedNumber: number;
+  rightLine?: boolean;
+}) {
   function line() {
     if (number == selectedNumber + 1) {
       return (
@@ -183,7 +321,50 @@ function ProjectBudget() {
     </div>
   );
 }
+
+function Submitx() {
+  return (
+    <div className="flex flex-col w-full justify-start items-center">
+      <div className="text-custom_neutral_800 text-custom700_24">
+        Submit your quote request
+      </div>
+      <div className="text-custom_neutral_600 text-custom400_18 w-52">
+        Please review all the information you previously typed in the past
+        steps, and if all is okay, submit your message to receive a project
+        quote in 24 - 48 hours.
+      </div>
+    </div>
+  );
+}
+
 function Submit() {
+  return (
+    <div className="flex flex-col w-full justify-start items-center">
+      <Image
+        src="/images/Group_37301.svg"
+        width={157.359}
+        height={143.415}
+        alt="Submit Image"
+      />
+      <div className="text-custom_neutral_800 text-custom700_24">
+        Submit your quote request
+      </div>
+      <div className="text-custom_neutral_600 text-custom400_18 pb-5 mt-2 w-[30rem]">
+        Please review all the information you previously typed in the past
+        steps, and if all is okay, submit your message to receive a project
+        quote in 24 - 48 hours.
+      </div>
+      <button
+        type="submit"
+        className="bg-custom_primary_color text-white px-10 py-5 rounded-[56px] text-custom700_18 drop-shadow-[0px_3px_12px_rgba(74,58,255,0.18)]"
+      >
+        Submit
+      </button>
+    </div>
+  );
+}
+
+function Submitxx() {
   return (
     <div className="flex flex-col w-full justify-start items-center px-14">
       <Image
@@ -200,7 +381,10 @@ function Submit() {
         steps, and if all is okay, submit your message to receive a project
         quote in 24 - 48 hours.
       </div>
-      <button className="bg-custom_primary_color text-white px-10 py-5 rounded-[56px] text-custom700_18 drop-shadow-[0px_3px_12px_rgba(74,58,255,0.18)]">
+      <button
+        type="submit"
+        className="bg-custom_primary_color text-white px-10 py-5 rounded-[56px] text-custom700_18 drop-shadow-[0px_3px_12px_rgba(74,58,255,0.18)]"
+      >
         Submit
       </button>
     </div>
