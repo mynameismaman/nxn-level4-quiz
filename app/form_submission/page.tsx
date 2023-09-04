@@ -61,7 +61,7 @@ export default function Home() {
         </div>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div
-            className={`flex flex-col justify-normal items-center w-custom h-[37.875rem] text-center pt-8 rounded-3xl border border-slate-200 shadow-lg`}
+            className={`flex flex-col justify-normal items-center w-custom h-[37.875rem] max-md:h-fit text-center pt-8 rounded-3xl border border-slate-200 shadow-lg`}
           >
             <Tab.Group selectedIndex={selectedIndex}>
               <Tab.List className="flex space-x-4 px-2 py-2 justify-center">
@@ -387,7 +387,7 @@ function Submitx() {
 
 function Submit() {
   return (
-    <div className="flex flex-col w-full justify-start items-center">
+    <div className="flex flex-col w-full justify-start items-center mb-10">
       <Image
         src="/images/Group_37301.svg"
         width={157.359}
