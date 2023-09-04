@@ -97,7 +97,13 @@ export default function Home() {
                     <ContactDetail />
                     <div className="flex flex-wrap mb-6 mt-8 justify-between ">
                       <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0 text-left">
-                        <label className="block tracking-wide text-custom_neutral_800 mb-4 text-custom500_18">
+                        <label
+                          className={`block tracking-wide ${
+                            errors.name
+                              ? "text-custom_primary_color_2"
+                              : "text-custom_neutral_800"
+                          } mb-4 text-custom500_18`}
+                        >
                           Name
                         </label>
                         <label className="relative block">
@@ -109,21 +115,33 @@ export default function Home() {
                             className="pointer-events-none absolute top-4 right-5"
                           />
                           <input
-                            className="appearance-none block w-full h-16  text-custom_neutral_600 border border-[#EFF0F6] shadow-[0px_5px_16px_0_rgba(8,15,52,0.06)] rounded-[46px] py-5 pl-6 pr-12 mb-4 leading-tight focus:outline-none focus:bg-white"
+                            className={`appearance-none block w-full h-16  text-custom_neutral_600 border ${
+                              errors.name
+                                ? "border-custom_primary_color_2"
+                                : "border-[#EFF0F6]"
+                            } shadow-[0px_5px_16px_0_rgba(8,15,52,0.06)] rounded-[46px] py-5 pl-6 pr-12 mb-4 leading-tight focus:outline-none focus:bg-white`}
                             id="grid-first-name"
                             type="text"
                             placeholder="Name"
                             {...register("name", { required: true })}
                           />
                         </label>
-                        {errors.name && (
-                          <p className="text-red-500 text-xs italic text-right">
-                            is Required
-                          </p>
-                        )}
+                        <p
+                          className={`text-custom_primary_color_2 text-xs text-right ${
+                            errors.name ? "visible" : "invisible"
+                          }`}
+                        >
+                          Name is required
+                        </p>
                       </div>
                       <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0 text-left">
-                        <label className="block tracking-wide text-custom_neutral_800 mb-4 text-custom500_18">
+                        <label
+                          className={`block tracking-wide ${
+                            errors.email
+                              ? "text-custom_primary_color_2"
+                              : "text-custom_neutral_800"
+                          } mb-4 text-custom500_18`}
+                        >
                           Email
                         </label>
                         <label className="relative block">
@@ -135,21 +153,33 @@ export default function Home() {
                             className="pointer-events-none absolute top-6 right-5"
                           />
                           <input
-                            className="appearance-none block w-full h-16  text-custom_neutral_600 border border-[#EFF0F6] shadow-[0px_5px_16px_0_rgba(8,15,52,0.06)] rounded-[46px] py-5 pl-6 pr-12 mb-4 leading-tight focus:outline-none focus:bg-white"
+                            className={`appearance-none block w-full h-16  text-custom_neutral_600 border ${
+                              errors.email
+                                ? "border-custom_primary_color_2"
+                                : "border-[#EFF0F6]"
+                            } shadow-[0px_5px_16px_0_rgba(8,15,52,0.06)] rounded-[46px] py-5 pl-6 pr-12 mb-4 leading-tight focus:outline-none focus:bg-white`}
                             id="grid-first-name"
                             type="text"
                             placeholder="Email"
                             {...register("email", { required: true })}
                           />
                         </label>
-                        {errors.email && (
-                          <p className="text-red-500 text-xs italic text-right">
-                            is Required
-                          </p>
-                        )}
+                        <p
+                          className={`text-custom_primary_color_2 text-xs text-right ${
+                            errors.email ? "visible" : "invisible"
+                          }`}
+                        >
+                          Email is required
+                        </p>
                       </div>
                       <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0 text-left">
-                        <label className="block tracking-wide text-custom_neutral_800 mb-4 text-custom500_18">
+                        <label
+                          className={`block tracking-wide ${
+                            errors.phoneNumber
+                              ? "text-custom_primary_color_2"
+                              : "text-custom_neutral_800"
+                          } mb-4 text-custom500_18`}
+                        >
                           Phone Number
                         </label>
                         <label className="relative block">
@@ -161,21 +191,33 @@ export default function Home() {
                             className="pointer-events-none absolute top-5 right-5"
                           />
                           <input
-                            className="appearance-none block w-full h-16  text-custom_neutral_600 border border-[#EFF0F6] shadow-[0px_5px_16px_0_rgba(8,15,52,0.06)] rounded-[46px] py-5 pl-6 pr-12 mb-4 leading-tight focus:outline-none focus:bg-white"
+                            className={`appearance-none block w-full h-16  text-custom_neutral_600 border ${
+                              errors.phoneNumber
+                                ? "border-custom_primary_color_2"
+                                : "border-[#EFF0F6]"
+                            } shadow-[0px_5px_16px_0_rgba(8,15,52,0.06)] rounded-[46px] py-5 pl-6 pr-12 mb-4 leading-tight focus:outline-none focus:bg-white`}
                             id="grid-first-name"
                             type="text"
                             placeholder="Phone Number"
                             {...register("phoneNumber", { required: true })}
                           />
                         </label>
-                        {errors.phoneNumber && (
-                          <p className="text-red-500 text-xs italic text-right">
-                            is Required
-                          </p>
-                        )}
+                        <p
+                          className={`text-custom_primary_color_2 text-xs text-right ${
+                            errors.phoneNumber ? "visible" : "invisible"
+                          }`}
+                        >
+                          Phone number is required
+                        </p>
                       </div>
                       <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0 text-left">
-                        <label className="block tracking-wide text-custom_neutral_800 mb-4 text-custom500_18">
+                        <label
+                          className={`block tracking-wide ${
+                            errors.company
+                              ? "text-custom_primary_color_2"
+                              : "text-custom_neutral_800"
+                          } mb-4 text-custom500_18`}
+                        >
                           Company
                         </label>
                         <label className="relative block">
@@ -187,18 +229,24 @@ export default function Home() {
                             className="pointer-events-none absolute top-5 right-5"
                           />
                           <input
-                            className="appearance-none block w-full h-16  text-custom_neutral_600 border border-[#EFF0F6] shadow-[0px_5px_16px_0_rgba(8,15,52,0.06)] rounded-[46px] py-5 pl-6 pr-12 mb-4 leading-tight focus:outline-none focus:bg-white"
+                            className={`appearance-none block w-full h-16  text-custom_neutral_600 border ${
+                              errors.company
+                                ? "border-custom_primary_color_2"
+                                : "border-[#EFF0F6]"
+                            } shadow-[0px_5px_16px_0_rgba(8,15,52,0.06)] rounded-[46px] py-5 pl-6 pr-12 mb-4 leading-tight focus:outline-none focus:bg-white`}
                             id="grid-first-name"
                             type="text"
                             placeholder="Company"
                             {...register("company", { required: true })}
                           />
                         </label>
-                        {errors.company && (
-                          <p className="text-red-500 text-xs italic text-right">
-                            is Required
-                          </p>
-                        )}
+                        <p
+                          className={`text-custom_primary_color_2 text-xs text-right ${
+                            errors.company ? "visible" : "invisible"
+                          }`}
+                        >
+                          Company is required
+                        </p>
                       </div>
                     </div>
                   </Tab.Panel>

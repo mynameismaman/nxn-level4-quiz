@@ -62,6 +62,7 @@ module.exports = {
         custom_neutral_800: "#170F49",
         custom_neutral_600: "#6F6C90",
         custom_primary_color: "#4A3AFF",
+        custom_primary_color_2: "#962DFF",
       },
     },
   },
