@@ -123,15 +123,17 @@ export default function Home() {
                             id="grid-first-name"
                             type="text"
                             placeholder="Name"
-                            {...register("name", { required: true })}
+                            {...register("name", {
+                              required: "Name is required",
+                            })}
                           />
                         </label>
                         <p
-                          className={`text-custom_primary_color_2 text-xs text-right ${
+                          className={`text-custom_primary_color_2 text-xs text-right h-3 ${
                             errors.name ? "visible" : "invisible"
                           }`}
                         >
-                          Name is required
+                          {errors.name?.message}
                         </p>
                       </div>
                       <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0 text-left">
@@ -149,7 +151,7 @@ export default function Home() {
                             src="/images/icon_message.png"
                             width={23}
                             height={16}
-                            alt="message"
+                            alt="email"
                             className="pointer-events-none absolute top-6 right-5"
                           />
                           <input
@@ -161,15 +163,19 @@ export default function Home() {
                             id="grid-first-name"
                             type="text"
                             placeholder="Email"
-                            {...register("email", { required: true })}
+                            {...register("email", {
+                              required: "Email is required",
+                              validate: (v) =>
+                                v.endsWith("@gmail.com") || "Email is invalid",
+                            })}
                           />
                         </label>
                         <p
-                          className={`text-custom_primary_color_2 text-xs text-right ${
+                          className={`text-custom_primary_color_2 text-xs text-right h-3 ${
                             errors.email ? "visible" : "invisible"
                           }`}
                         >
-                          Email is required
+                          {errors.email?.message}
                         </p>
                       </div>
                       <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0 text-left">
@@ -199,15 +205,27 @@ export default function Home() {
                             id="grid-first-name"
                             type="text"
                             placeholder="Phone Number"
-                            {...register("phoneNumber", { required: true })}
+                            {...register("phoneNumber", {
+                              required: "Phone number is required",
+                              minLength: {
+                                value: 8,
+                                message: "Phone number is invalid",
+                              },
+                              maxLength: {
+                                value: 12,
+                                message: "Phone number is invalid",
+                              },
+                              validate: (v) =>
+                                v.startsWith("08") || "Phone number is invalid",
+                            })}
                           />
                         </label>
                         <p
-                          className={`text-custom_primary_color_2 text-xs text-right ${
+                          className={`text-custom_primary_color_2 text-xs text-right h-3 ${
                             errors.phoneNumber ? "visible" : "invisible"
                           }`}
                         >
-                          Phone number is required
+                          {errors.phoneNumber?.message}
                         </p>
                       </div>
                       <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0 text-left">
@@ -237,15 +255,17 @@ export default function Home() {
                             id="grid-first-name"
                             type="text"
                             placeholder="Company"
-                            {...register("company", { required: true })}
+                            {...register("company", {
+                              required: "Company is required",
+                            })}
                           />
                         </label>
                         <p
-                          className={`text-custom_primary_color_2 text-xs text-right ${
+                          className={`text-custom_primary_color_2 text-xs text-right h-3 ${
                             errors.company ? "visible" : "invisible"
                           }`}
                         >
-                          Company is required
+                          {errors.company?.message}
                         </p>
                       </div>
                     </div>
