@@ -215,8 +215,15 @@ export default function Home() {
                                 value: 12,
                                 message: "Phone number is invalid",
                               },
-                              validate: (v) =>
-                                v.startsWith("08") || "Phone number is invalid",
+                              pattern: {
+                                value: /^[0-9]+$/i,
+                                message: "Phone number is invalid Patrrn",
+                              },
+                              validate: {
+                                start: (v) =>
+                                  v.startsWith("08") ||
+                                  "Phone number is invalid",
+                              },
                             })}
                           />
                         </label>
@@ -272,6 +279,28 @@ export default function Home() {
                   </Tab.Panel>
                   <Tab.Panel>
                     <OurService />
+                    <div className="flex flex-wrap mb-6 mt-8 justify-between ">
+                      <div className="flex flex-row w-full h-28 md:w-1/2 px-3 mb-6 md:mb-0 text-left rounded-3xl border border-slate-200 shadow-[0px_2px_6px_0px_rgba(19,18,66,0.07)]">
+                        <label
+                          className={`block tracking-wide ${
+                            errors.phoneNumber
+                              ? "text-custom_primary_color_2"
+                              : "text-custom_neutral_800"
+                          } mb-4 text-custom500_18`}
+                        >
+                          Phone Number
+                        </label>
+                        <label
+                          className={`block tracking-wide ${
+                            errors.phoneNumber
+                              ? "text-custom_primary_color_2"
+                              : "text-custom_neutral_800"
+                          } mb-4 text-custom500_18`}
+                        >
+                          Phone
+                        </label>
+                      </div>
+                    </div>
                   </Tab.Panel>
                   <Tab.Panel>
                     <ProjectBudget />
@@ -390,21 +419,6 @@ function ProjectBudget() {
   );
 }
 
-function Submitx() {
-  return (
-    <div className="flex flex-col w-full justify-start items-center">
-      <div className="text-custom_neutral_800 text-custom700_24">
-        Submit your quote request
-      </div>
-      <div className="text-custom_neutral_600 text-custom400_18 w-52">
-        Please review all the information you previously typed in the past
-        steps, and if all is okay, submit your message to receive a project
-        quote in 24 - 48 hours.
-      </div>
-    </div>
-  );
-}
-
 function Submit() {
   return (
     <div className="flex flex-col w-full justify-start items-center mb-10">
@@ -418,33 +432,6 @@ function Submit() {
         Submit your quote request
       </div>
       <div className="text-custom_neutral_600 text-custom400_18 pb-5 mt-2 w-[30rem]">
-        Please review all the information you previously typed in the past
-        steps, and if all is okay, submit your message to receive a project
-        quote in 24 - 48 hours.
-      </div>
-      <button
-        type="submit"
-        className="bg-custom_primary_color text-white px-10 py-5 rounded-[56px] text-custom700_18 drop-shadow-[0px_3px_12px_rgba(74,58,255,0.18)]"
-      >
-        Submit
-      </button>
-    </div>
-  );
-}
-
-function Submitxx() {
-  return (
-    <div className="flex flex-col w-full justify-start items-center px-14">
-      <Image
-        src="/images/Group_37301.svg"
-        width={157.359}
-        height={143.415}
-        alt="Submit Image"
-      />
-      <div className="text-custom_neutral_800 text-custom700_24">
-        Submit your quote request
-      </div>
-      <div className="text-custom_neutral_600 text-custom400_18 pb-5 mt-2">
         Please review all the information you previously typed in the past
         steps, and if all is okay, submit your message to receive a project
         quote in 24 - 48 hours.
