@@ -15,7 +15,8 @@ type Inputs = {
   email: string;
   phoneNumber: string;
   company: string;
-  alamatCuy: string;
+  services: string;
+  budget: string;
 };
 
 export default function Home() {
@@ -25,10 +26,13 @@ export default function Home() {
     handleSubmit,
     reset,
     getValues,
+    watch,
     formState: { errors, isValid },
-  } = useForm<Inputs>();
+  } = useForm<Inputs>({
+    defaultValues: { services: "Development", budget: "$50.000 +" },
+  });
 
-  const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data);
+  const onSubmit: SubmitHandler<Inputs> = (data) => alert(JSON.stringify(data));
 
   function handleNextButton() {
     if (!isValid) return;
@@ -41,6 +45,10 @@ export default function Home() {
   }
 
   function handlePreviousButton() {
+    if (!isValid) return;
+
+    reset({ ...getValues }, { keepValues: true });
+
     if (selectedIndex >= 1) {
       setSelectedIndex(selectedIndex - 1);
     }
@@ -280,30 +288,208 @@ export default function Home() {
                   <Tab.Panel>
                     <OurService />
                     <div className="flex flex-wrap mb-6 mt-8 justify-between ">
-                      <div className="flex flex-row w-full h-28 md:w-1/2 px-3 mb-6 md:mb-0 text-left rounded-3xl border border-slate-200 shadow-[0px_2px_6px_0px_rgba(19,18,66,0.07)]">
+                      <div className="mb-6">
+                        <input
+                          type="radio"
+                          id="development"
+                          value="Development"
+                          className="hidden peer"
+                          {...register("services")}
+                        />
                         <label
-                          className={`block tracking-wide ${
-                            errors.phoneNumber
-                              ? "text-custom_primary_color_2"
-                              : "text-custom_neutral_800"
-                          } mb-4 text-custom500_18`}
+                          htmlFor="development"
+                          className="flex flex-row items-center w-64 h-28 pl-6 text-left text-custom500_18 text-custom_neutral_800 rounded-3xl border border-slate-200 shadow-[0px_2px_6px_0px_rgba(19,18,66,0.07)] cursor-pointer peer-checked:border-custom_primary_color peer-checked:border-2 hover:bg-gray-100"
                         >
-                          Phone Number
+                          <div className="w-16 h-16 mr-3 bg-slate-200 rounded-full flex justify-center items-center">
+                            <Image
+                              src="/images/icon_development.png"
+                              width={37.463}
+                              height={32}
+                              alt="icon"
+                            />
+                          </div>
+                          Development
                         </label>
+                      </div>
+                      <div className="mb-6">
+                        <input
+                          type="radio"
+                          id="webDesign"
+                          value="Web Design"
+                          className="hidden peer"
+                          {...register("services")}
+                        />
                         <label
-                          className={`block tracking-wide ${
-                            errors.phoneNumber
-                              ? "text-custom_primary_color_2"
-                              : "text-custom_neutral_800"
-                          } mb-4 text-custom500_18`}
+                          htmlFor="webDesign"
+                          className="flex flex-row items-center w-64 h-28 pl-6 text-left text-custom500_18 text-custom_neutral_800 rounded-3xl border border-slate-200 shadow-[0px_2px_6px_0px_rgba(19,18,66,0.07)] cursor-pointer peer-checked:border-custom_primary_color peer-checked:border-2 hover:bg-gray-100"
                         >
-                          Phone
+                          <div className="w-16 h-16 mr-3 bg-slate-200 rounded-full flex justify-center items-center">
+                            <Image
+                              src="/images/icon_webdesign.png"
+                              width={37.463}
+                              height={32}
+                              alt="icon"
+                            />
+                          </div>
+                          Web Design
+                        </label>
+                      </div>
+                      <div className="mb-6">
+                        <input
+                          type="radio"
+                          id="marketing"
+                          value="Marketing"
+                          className="hidden peer"
+                          {...register("services")}
+                        />
+                        <label
+                          htmlFor="marketing"
+                          className="flex flex-row items-center w-64 h-28 pl-6 text-left text-custom500_18 text-custom_neutral_800 rounded-3xl border border-slate-200 shadow-[0px_2px_6px_0px_rgba(19,18,66,0.07)] cursor-pointer peer-checked:border-custom_primary_color peer-checked:border-2 hover:bg-gray-100"
+                        >
+                          <div className="w-16 h-16 mr-3 bg-slate-200 rounded-full flex justify-center items-center">
+                            <Image
+                              src="/images/icon_marketing.png"
+                              width={34.726}
+                              height={28}
+                              alt="icon"
+                            />
+                          </div>
+                          Marketing
+                        </label>
+                      </div>
+                      <div className="mb-6">
+                        <input
+                          type="radio"
+                          id="other"
+                          value="Other"
+                          className="hidden peer"
+                          {...register("services")}
+                        />
+                        <label
+                          htmlFor="other"
+                          className="flex flex-row items-center w-64 h-28 pl-6 text-left text-custom500_18 text-custom_neutral_800 rounded-3xl border border-slate-200 shadow-[0px_2px_6px_0px_rgba(19,18,66,0.07)] cursor-pointer peer-checked:border-custom_primary_color peer-checked:border-2 hover:bg-gray-100"
+                        >
+                          <div className="w-16 h-16 mr-3 bg-slate-200 rounded-full flex justify-center items-center">
+                            <Image
+                              src="/images/icon_other.png"
+                              width={37.463}
+                              height={32}
+                              alt="icon"
+                            />
+                          </div>
+                          Other
                         </label>
                       </div>
                     </div>
                   </Tab.Panel>
                   <Tab.Panel>
                     <ProjectBudget />
+                    <div className="flex flex-wrap mb-6 mt-8 justify-between ">
+                      <div className="mb-6">
+                        <input
+                          type="radio"
+                          id="budget1"
+                          value="$5.000 - $10.000"
+                          className="hidden peer"
+                          {...register("budget")}
+                        />
+                        <label
+                          htmlFor="budget1"
+                          className="flex flex-row items-center w-64 h-28 pl-6 text-left text-custom500_18 text-custom_neutral_800 rounded-3xl border border-slate-200 shadow-[0px_2px_6px_0px_rgba(19,18,66,0.07)] cursor-pointer peer-checked:border-custom_primary_color peer-checked:border-2 hover:bg-gray-100"
+                        >
+                          <label
+                            className={`w-6 h-6 mr-3 ${
+                              watch("budget") == "$5.000 - $10.000"
+                                ? "bg-custom_primary_color"
+                                : "bg-white"
+                            } border border-custom_neutral_400 rounded-full flex justify-center items-center`}
+                          >
+                            <div
+                              className={`w-2 h-2 rounded-full bg-white`}
+                            ></div>
+                          </label>
+                          $5.000 - $10.000
+                        </label>
+                      </div>
+                      <div className="mb-6">
+                        <input
+                          type="radio"
+                          id="budget2"
+                          value="$10.000 - $20.000"
+                          className="hidden peer"
+                          {...register("budget")}
+                        />
+                        <label
+                          htmlFor="budget2"
+                          className="flex flex-row items-center w-64 h-28 pl-6 text-left text-custom500_18 text-custom_neutral_800 rounded-3xl border border-slate-200 shadow-[0px_2px_6px_0px_rgba(19,18,66,0.07)] cursor-pointer peer-checked:border-custom_primary_color peer-checked:border-2 hover:bg-gray-100"
+                        >
+                          <label
+                            className={`w-6 h-6 mr-3 ${
+                              watch("budget") == "$10.000 - $20.000"
+                                ? "bg-custom_primary_color"
+                                : "bg-white"
+                            } border border-custom_neutral_400 rounded-full flex justify-center items-center`}
+                          >
+                            <div
+                              className={`w-2 h-2 rounded-full bg-white`}
+                            ></div>
+                          </label>
+                          $10.000 - $20.000
+                        </label>
+                      </div>
+                      <div className="mb-6">
+                        <input
+                          type="radio"
+                          id="budget3"
+                          value="$20.000 - $50.000"
+                          className="hidden peer"
+                          {...register("budget")}
+                        />
+                        <label
+                          htmlFor="budget3"
+                          className="flex flex-row items-center w-64 h-28 pl-6 text-left text-custom500_18 text-custom_neutral_800 rounded-3xl border border-slate-200 shadow-[0px_2px_6px_0px_rgba(19,18,66,0.07)] cursor-pointer peer-checked:border-custom_primary_color peer-checked:border-2 hover:bg-gray-100"
+                        >
+                          <label
+                            className={`w-6 h-6 mr-3 ${
+                              watch("budget") == "$20.000 - $50.000"
+                                ? "bg-custom_primary_color"
+                                : "bg-white"
+                            } border border-custom_neutral_400 rounded-full flex justify-center items-center`}
+                          >
+                            <div
+                              className={`w-2 h-2 rounded-full bg-white`}
+                            ></div>
+                          </label>
+                          $20.000 - $50.000
+                        </label>
+                      </div>
+                      <div className="mb-6">
+                        <input
+                          type="radio"
+                          id="budget4"
+                          value="$50.000 +"
+                          className="hidden peer"
+                          {...register("budget")}
+                        />
+                        <label
+                          htmlFor="budget4"
+                          className="flex flex-row items-center w-64 h-28 pl-6 text-left text-custom500_18 text-custom_neutral_800 rounded-3xl border border-slate-200 shadow-[0px_2px_6px_0px_rgba(19,18,66,0.07)] cursor-pointer peer-checked:border-custom_primary_color peer-checked:border-2 hover:bg-gray-100"
+                        >
+                          <label
+                            className={`w-6 h-6 mr-3 ${
+                              watch("budget") == "$50.000 +"
+                                ? "bg-custom_primary_color"
+                                : "bg-white"
+                            } border border-custom_neutral_400 rounded-full flex justify-center items-center`}
+                          >
+                            <div
+                              className={`w-2 h-2 rounded-full bg-white`}
+                            ></div>
+                          </label>
+                          $50.000 +
+                        </label>
+                      </div>
+                    </div>
                   </Tab.Panel>
                   <Tab.Panel>
                     <Submit />
@@ -322,7 +508,7 @@ export default function Home() {
               Next Step
             </button>
             <button
-              onClick={handlePreviousButton}
+              onClick={handleSubmit(handlePreviousButton)}
               className={`border border-custom_primary_color text-custom_primary_color px-10 py-5 rounded-[66px] text-custom400_18 ${
                 selectedIndex == 0 ? "invisible" : "visible"
               }`}
