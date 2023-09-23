@@ -5,9 +5,9 @@ import { DM_Sans } from "next/font/google";
 import Image from "next/image";
 import { useForm, SubmitHandler } from "react-hook-form";
 
-const dm_sans = DM_Sans({
+const dmSans = DM_Sans({
   subsets: ["latin"],
-  variable: "--font-dm_sans",
+  variable: "--font-dmSans",
 });
 
 type Inputs = {
@@ -55,7 +55,7 @@ export default function Home() {
   }
   return (
     <div
-      className={`${dm_sans.variable} font-custom text-neutral-600 flex flex-col justify-center items-center w-full mt-4 mb-16`}
+      className={`${dmSans.variable} font-custom text-neutral-600 flex flex-col justify-center items-center w-full mt-4 mb-16`}
     >
       <div
         className={`flex flex-col justify-center items-center w-custom text-center`}

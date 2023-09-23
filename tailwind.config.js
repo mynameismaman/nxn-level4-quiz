@@ -10,7 +10,7 @@ module.exports = {
   ],
   theme: {
     extend: {
-      fontFamily: { custom: ["var(--font-dm_sans)"] },
+      fontFamily: { custom: ["var(--font-dmSans)", "var(--font-openSans)"] },
       fontSize: {
         custom700_34: [
           "34px",
@@ -31,6 +31,38 @@ module.exports = {
           {
             lineHeight: "20px",
             fontWeight: "700",
+          },
+        ],
+        custom600_30: [
+          "30px",
+          {
+            fontWeight: "600",
+            lineHeight: "40px",
+          },
+        ],
+        custom600_24: [
+          "24px",
+          {
+            fontWeight: "600",
+          },
+        ],
+        custom600_16: [
+          "16px",
+          {
+            lineHeight: "23px",
+            fontWeight: "600",
+          },
+        ],
+        custom400_16: [
+          "16px",
+          {
+            fontWeight: "400",
+          },
+        ],
+        custom400_14: [
+          "14px",
+          {
+            fontWeight: "400",
           },
         ],
         custom500_18: [
@@ -63,6 +95,7 @@ module.exports = {
         custom_neutral_600: "#6F6C90",
         custom_primary_color: "#4A3AFF",
         custom_primary_color_2: "#962DFF",
+        custom_pink: "#FF5480",
       },
     },
   },
