@@ -144,7 +144,7 @@ function RelatedList({
                     {index + 1 > 9 ? index + 1 : "0" + (index + 1)}
                   </div>
                   <Link
-                    href={article.slug}
+                    href={`/${article.slug}`}
                     className="text-custom600_24 leading-snug"
                   >
                     {article.title}
