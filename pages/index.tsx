@@ -130,6 +130,7 @@ export default function Home({
               height={29}
               alt="logo"
               className="w-[6.188rem] h-[1.813rem]"
+              priority={true}
             />
           </div>
         </div>
@@ -142,6 +143,7 @@ export default function Home({
               thumbnail={value.thumbnail}
               author={value.author}
               category={value.category}
+              slug={value.slug}
             />
           ))}
           {articles.map(
@@ -155,6 +157,7 @@ export default function Home({
                   thumbnail={value.thumbnail}
                   author={value.author}
                   category={value.category}
+                  slug={value.slug}
                 />
               )),
           )}
@@ -173,12 +176,14 @@ function Article({
   thumbnail,
   author,
   category,
+  slug,
 }: {
   id: number;
   title: string;
   thumbnail: string;
   author: author;
   category: category;
+  slug: string;
 }) {
   return (
     <div key={id} className="mb-14 w-[40.625rem] max-sm:w-full">
@@ -188,7 +193,7 @@ function Article({
         width={600}
         alt="Image"
         priority={true}
-        className="h-[25rem] w-[37.5rem]"
+        className="h-[25rem] w-[37.5rem] rounded-md"
       />
       <div className="mt-3 flex flex-row text-custom400_14">
         <div className="pr-2 text-[#9B9B9B]">BY</div>
@@ -200,7 +205,9 @@ function Article({
         <div className="pr-2 text-[#9B9B9B]">IN</div>
         <div className="pr-2">{category.name}</div>
       </div>
-      <p className={`text-custom600_30`}>{title}</p>
+      <p className={`text-custom600_30`}>
+        <Link href={slug}>{title}</Link>
+      </p>
     </div>
   );
 }

@@ -19,6 +19,12 @@ module.exports = {
             fontWeight: "700",
           },
         ],
+        custom700_28: [
+          "28px",
+          {
+            fontWeight: "700",
+          },
+        ],
         custom700_24: [
           "24px",
           {
@@ -51,6 +57,13 @@ module.exports = {
           {
             lineHeight: "23px",
             fontWeight: "600",
+          },
+        ],
+        custom400_20: [
+          "20px",
+          {
+            fontWeight: "400",
+            lineHeight: "30px",
           },
         ],
         custom400_16: [

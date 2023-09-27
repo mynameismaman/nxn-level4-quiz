@@ -7,7 +7,7 @@ const openSans = Open_Sans({ subsets: ["latin"] });
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
-    <main className={openSans.className}>
+    <main className={`${openSans.className} bg-[#F9F9FB]`}>
       <Component {...pageProps} />
     </main>
   );
