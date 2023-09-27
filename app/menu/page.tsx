@@ -45,12 +45,7 @@ export default function Home() {
                 </Menu.Item>
                 <Menu.Item>
                   {({ active }) => (
-                    <Link
-                      href="/blog_website"
-                      passHref
-                      rel="no-referrer"
-                      target="_blank"
-                    >
+                    <Link href="/" passHref rel="no-referrer" target="_blank">
                       <button
                         className={`${
                           active ? "bg-amber-500 font-bold" : "text-gray-900"
